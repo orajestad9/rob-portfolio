@@ -1,0 +1,33 @@
+---
+import "../styles/global.css";
+---
+
+<!-- Minimal shared page shell. Future UI components can be composed inside the slot. -->
+<html lang="en">
+  <body>
+    <!-- Header stays simple for the initial portfolio foundation: brand link plus primary nav. -->
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="site-title" href="/">Rob Flot</a>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="/projects">Projects</a>
+          <a href="/blog">Blog</a>
+          <a href="/about">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main wraps page-specific content in one centered container for consistent spacing. -->
+    <main class="container site-main">
+      <slot />
+    </main>
+
+    <!-- Footer keeps contact links available without adding extra interface complexity. -->
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <a href="mailto:robflot87@gmail.com">robflot87@gmail.com</a>
+        <a href="https://www.linkedin.com/in/ROBERTFLOT">LinkedIn: ROBERTFLOT</a>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,11 +1,22 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout>
+  <!-- Hero introduces the portfolio owner without adding full page UI yet. -->
+  <section class="hero" aria-labelledby="home-title">
+    <h1 id="home-title">Rob Flot</h1>
+    <p class="hero__title">Staff SDET | Backend & Distributed Systems Engineer</p>
+    <p>
+      I am a self-taught engineer with 16 years of experience building and testing backend systems.
+      My work focuses on distributed systems, service reliability, and practical engineering that holds up under real load.
+    </p>
+
+    <!-- Primary links are plain text for now; destination pages come in later phases. -->
+    <nav class="link-list" aria-label="Home page links">
+      <a href="/projects">View Projects</a>
+      <a href="/blog">Read Blog</a>
+      <a href="/resume.pdf">Download Resume</a>
+    </nav>
+  </section>
+</BaseLayout>
