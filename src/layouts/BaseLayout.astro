@@ -1,17 +1,47 @@
 ---
 import "../styles/global.css";
+
+const siteUrl = "https://robflot.com";
+
+const {
+  title = "Rob Flot — Staff SDET",
+  description = "Staff SDET focused on backend systems, distributed architecture, and testing as infrastructure.",
+  //image = "/og-image.png",
+  path = ""
+} = Astro.props;
+
+const url = `${siteUrl}${path}`;
+//const imageUrl = `${siteUrl}${image}`;
 ---
 
 <!-- Minimal shared page shell. Future UI components can be composed inside the slot. -->
 <html lang="en">
   <head>
+    <!-- BaseLayout owns core metadata so every page gets consistent defaults. -->
+    <!-- Defaults keep pages valid even before page-specific copy is added. -->
+    <!-- This stays intentionally minimal: no structured data, canonical URLs, or SEO framework yet. -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- OpenGraph and Twitter metadata provide useful link previews in Slack, LinkedIn, and similar tools. -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
+    <meta property="og:site_name" content="Rob Flot" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
     <!-- Inter gives the site a modern, readable feel while keeping typography to one font family. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="canonical" href={url} />
   </head>
   <body>
-    <!-- Header stays simple for the initial portfolio foundation: brand link plus primary nav. -->
+    <!-- Header stays minimal: brand identity and primary nav without extra UI. -->
     <header class="site-header">
       <div class="container site-header__inner">
         <a class="site-title" href="/">Rob Flot</a>
@@ -23,7 +53,7 @@ import "../styles/global.css";
       </div>
     </header>
 
-    <!-- Main wraps page-specific content in one centered container for consistent spacing. -->
+    <!-- Page content uses one centered container so layout width stays consistent. -->
     <main class="site-main">
       <div class="container">
         <slot />
