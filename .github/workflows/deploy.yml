@@ -29,7 +29,7 @@ jobs:
     # Only deploy on push to main (not PRs)
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     needs: build
-    runs-on: self-hosted
+    runs-on: [self-hosted, rob-portfolio]
 
     steps:
       - name: Sync deploy repo
