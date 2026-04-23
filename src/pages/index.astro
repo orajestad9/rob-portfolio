@@ -1,21 +1,57 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const projects = (await getCollection("projects"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => a.data.order - b.data.order)
+  // Only the first two projects are shown so the homepage gives quick proof without becoming a project index.
+  .slice(0, 2);
 ---
 
 <BaseLayout>
-  <!-- Hero introduces the portfolio owner without adding full page UI yet. -->
-  <section class="hero" aria-labelledby="home-title">
+  <!-- Minimal hero: clear identity and primary actions without extra components or visual complexity. -->
+  <section class="container hero" aria-labelledby="home-title">
     <h1 id="home-title">Rob Flot</h1>
-    <p class="hero__title">Staff SDET | Backend & Distributed Systems Engineer</p>
-    <p>
-      Senior Software Engineer in Test with 16 years of experience building and operating backend systems and test infrastructure at enterprise scale. Self-taught, with a focus on distributed systems, CI/CD automation, and performance engineering. I approach testing as infrastructure—designing systems for reliability, observability, and fast, confident releases.
+    <p class="hero__title">
+      Staff SDET focused on backend systems, distributed architecture, and testing as infrastructure
     </p>
 
-    <!-- Primary links are plain text for now; destination pages come in later phases. -->
     <nav class="link-list" aria-label="Home page links">
       <a href="/projects">View Projects</a>
-      <a href="/blog">Read Blog</a>
       <a href="/resume.pdf">Download Resume</a>
     </nav>
+  </section>
+
+  <!-- Text-first positioning keeps the homepage direct and avoids unnecessary cards or abstractions. -->
+  <section class="container" aria-labelledby="positioning-title">
+    <h2 id="positioning-title">What I Do</h2>
+    <p>
+      I build and operate testing systems the same way production systems are built-scalable, observable, and integrated into the delivery pipeline.
+    </p>
+    <p>
+      Most of my work lives at the intersection of backend engineering, CI/CD automation, and performance testing. I focus on eliminating manual validation and making releases fast, predictable, and safe.
+    </p>
+  </section>
+
+  <!-- Featured work reuses collection content directly instead of introducing homepage-only components. -->
+  <section class="container" aria-labelledby="selected-work-title">
+    <h2 id="selected-work-title">Selected Work</h2>
+
+    {
+      projects.map((project) => {
+        const slug = project.data.slug ?? project.id.split("/").pop()?.replace(/\.md$/, "");
+
+        return (
+          <article>
+            <h3>
+              <a href={`/projects/${slug}`}>{project.data.title}</a>
+            </h3>
+            <p>{project.data.description}</p>
+            <a href={`/projects/${slug}`}>Read more →</a>
+          </article>
+        );
+      })
+    }
   </section>
 </BaseLayout>
