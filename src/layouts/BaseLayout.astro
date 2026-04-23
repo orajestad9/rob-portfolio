@@ -19,14 +19,16 @@ import "../styles/global.css";
 
     <!-- Main wraps page-specific content in one centered container for consistent spacing. -->
     <main class="container site-main">
-      <slot />
+      <div class="container">
+        <slot />
+      </div>
     </main>
 
     <!-- Footer keeps contact links available without adding extra interface complexity. -->
     <footer class="site-footer">
       <div class="container site-footer__inner">
         <a href="mailto:robflot87@gmail.com">robflot87@gmail.com</a>
-        <a href="https://www.linkedin.com/in/ROBERTFLOT">LinkedIn: ROBERTFLOT</a>
+        <a href="https://www.linkedin.com/in/robert-flot-2173821a/">LinkedIn: Robert Flot</a>
       </div>
     </footer>
   </body>

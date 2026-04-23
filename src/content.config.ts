@@ -4,6 +4,7 @@ import { glob } from "astro/loaders";
 // Content collections define typed groups of Markdown content for the site.
 // Schemas keep frontmatter consistent so invalid or missing fields are caught early.
 const blog = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/blog" }),
   schema: z.object({
     title: z.string(),              // Post title
     description: z.string(),        // Short summary for SEO and listings
@@ -14,6 +15,7 @@ const blog = defineCollection({
 });
 
 const projects = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/projects" }),
   schema: z.object({
     title: z.string(),                 // Project name
     description: z.string(),           // Short summary

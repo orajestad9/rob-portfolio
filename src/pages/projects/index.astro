@@ -1,0 +1,31 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// getCollection loads every project entry from the projects content collection.
+const projects = (await getCollection("projects"))
+  // Draft entries stay in content but are hidden from public listing pages.
+  .filter((p) => !p.data.draft)
+  // Project order is controlled manually in frontmatter for predictable display.
+  .sort((a, b) => a.data.order - b.data.order);
+
+const getSlug = (id: string, slug?: string) => slug ?? id.replace(/\.md$/, "");
+---
+
+<BaseLayout>
+  <h1>Projects</h1>
+
+  {
+    projects.map((project) => (
+      <article>
+        <h2>
+          <a href={`/projects/${getSlug(project.id, project.data.slug)}`}>
+            {project.data.title}
+          </a>
+        </h2>
+        <p>{project.data.description}</p>
+        <a href={`/projects/${getSlug(project.id, project.data.slug)}`}>Read more →</a>
+      </article>
+    ))
+  }
+</BaseLayout>

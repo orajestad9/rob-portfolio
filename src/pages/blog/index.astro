@@ -1,0 +1,35 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// getCollection loads every blog entry from the blog content collection.
+const posts = (await getCollection("blog"))
+  // Draft posts are excluded from public lists.
+  .filter((p) => !p.data.draft)
+  // Newest posts appear first based on pubDate frontmatter.
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const getSlug = (id: string, slug?: string) => slug ?? id.replace(/\.md$/, "");
+const formatDate = (date: Date) =>
+  date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+---
+
+<BaseLayout>
+  <h1>Blog</h1>
+
+  {
+    posts.map((post) => (
+      <article>
+        <h2>
+          <a href={`/blog/${getSlug(post.id, post.data.slug)}`}>{post.data.title}</a>
+        </h2>
+        <p>{formatDate(post.data.pubDate)}</p>
+        <p>{post.data.description}</p>
+      </article>
+    ))
+  }
+</BaseLayout>

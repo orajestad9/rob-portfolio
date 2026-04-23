@@ -1,0 +1,38 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("blog"))
+    // Draft filtering keeps unpublished posts from generating public routes.
+    .filter((p) => !p.data.draft);
+
+  return posts.map((post) => ({
+    // Use explicit slug if provided, otherwise derive from filename safely.
+    params: {
+      slug:
+        post.data.slug ??
+        post.id.split("/").pop()?.replace(/\.md$/, ""),
+    },
+    props: { post },
+  }));
+}
+const { post } = Astro.props;
+// Markdown content is compiled by Astro and rendered through the Content component.
+const { Content } = await render(post);
+---
+
+<BaseLayout>
+  <article>
+    <h1>{post.data.title}</h1>
+    <p>{formatDate(post.data.pubDate)}</p>
+    <Content />
+  </article>
+</BaseLayout>

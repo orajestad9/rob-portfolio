@@ -30,18 +30,38 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* Consistent spacing between major sections */
+section {
+  margin-bottom: 3rem;
+}
+
+/* Basic vertical rhythm for headings and paragraphs */
+h1, h2, h3 {
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+/* Links use accent color and subtle hover feedback */
 a {
   color: var(--color-accent);
   text-decoration: none;
+  transition: opacity 0.15s ease;
 }
 
 a:hover {
   text-decoration: underline;
+  opacity: 0.85;
 }
 
+/* Central container controls layout width and horizontal spacing */
 .container {
   width: min(100% - (var(--space-page) * 2), var(--container-width));
   margin-inline: auto;
+  padding-block: 2rem;
 }
 
 .site-header {
@@ -66,6 +86,11 @@ a:hover {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem 1rem;
+}
+
+/* Space between navigation links */
+.site-nav a {
+  margin-left: 1rem;
 }
 
 .site-main {

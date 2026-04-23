@@ -1,0 +1,32 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const projects = (await getCollection("projects"))
+    // Draft filtering keeps unfinished project pages from being generated.
+    .filter((p) => !p.data.draft);
+
+  return projects.map((project) => ({
+    // Use explicit slug if provided, otherwise derive from filename safely.
+    params: {
+      slug:
+        project.data.slug ??
+        project.id.split("/").pop()?.replace(/\.md$/, ""),
+    },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+// Markdown content is compiled by Astro and exposed as a renderable Content component.
+const { Content } = await render(project);
+---
+
+<BaseLayout>
+  <article>
+    <h1>{project.data.title}</h1>
+    <p>{project.data.description}</p>
+    <Content />
+  </article>
+</BaseLayout>
