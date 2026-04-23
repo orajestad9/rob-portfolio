@@ -10,9 +10,14 @@ draft: false
 
 ## Problem
 
-Enterprise APIs need performance testing that can run consistently as part of the release process. Manual test execution is easy to skip, hard to repeat, and disconnected from the systems that actually build and deploy the software.
+Performance testing in this environment was not integrated into the release process. Tests were run manually or through ad-hoc scripts, which made them easy to skip and difficult to reproduce consistently.
 
-The goal was to make performance validation part of CI/CD instead of a separate activity. The pipeline needed to handle credentials, build the test runtime, deploy into Kubernetes, and execute k6 tests in a repeatable way.
+As the system evolved, this created risk:
+- performance regressions could reach production undetected
+- test execution varied between runs
+- validation was disconnected from the actual deployment pipeline
+
+The core problem was the absence of a repeatable, automated way to validate performance as part of CI/CD.
 
 ## Solution
 

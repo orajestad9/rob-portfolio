@@ -10,7 +10,11 @@ draft: false
 
 ## Problem
 
-ReadySetRentables needed AI-driven neighborhood insights across 32+ markets. The system had to support repeatable market profile generation while keeping model usage costs under control.
+Generating AI-driven neighborhood insights across 30+ markets introduced two challenges: scaling content generation and controlling model costs.
+
+A naive approach—running large hosted models for every market—would be expensive and difficult to operate at scale. At the same time, one-off prompt-based workflows made it hard to produce consistent, repeatable outputs across markets.
+
+The core problem was designing a system that could generate structured market insights reliably while optimizing where and how model inference runs.
 
 ## Solution
 

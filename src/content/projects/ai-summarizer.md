@@ -8,9 +8,13 @@ draft: false
 <!-- Markdown separates the project narrative from routing and layout code. -->
 <!-- The description stays technical so it reflects what the tool does without overstating scope. -->
 
-## Overview
+## Problem
 
-This tool extracts and processes multi-page PDFs for summarization. It is designed around large document handling rather than short single-prompt summaries.
+Summarizing large multi-page documents is not well suited to single-prompt workflows. When entire documents are passed to a model at once, context limits and token costs become a constraint.
+
+At the same time, splitting documents arbitrarily can break context, leading to fragmented or inconsistent summaries.
+
+The core problem was designing a workflow that could handle large documents while preserving enough context for coherent summarization.
 
 ## Approach
 
@@ -21,4 +25,11 @@ This tool extracts and processes multi-page PDFs for summarization. It is design
 
 ## Outcome
 
-The result is a document summarization workflow that can handle larger PDFs by breaking the work into structured processing steps before sending content to the model.
+The result is a structured summarization workflow that can handle large multi-page documents without exceeding model limits or sacrificing coherence.
+
+This approach makes it possible to:
+- process documents that would not fit within a single model context window
+- maintain more consistent summaries across large inputs
+- balance token usage and cost through controlled chunking
+
+The primary value is turning document summarization into a repeatable system rather than a single prompt-based task.
