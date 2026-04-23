@@ -5,8 +5,6 @@ order: 1
 draft: false
 ---
 
-# End-to-End k6 Performance Testing Pipeline on Kubernetes
-
 <!-- Case studies are Markdown-based so project content stays portable and separate from page rendering. -->
 <!-- The tone stays technical and minimal to describe the work without adding unsupported claims. -->
 

@@ -2,30 +2,50 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-// getCollection loads every project entry from the projects content collection.
 const projects = (await getCollection("projects"))
-  // Draft entries stay in content but are hidden from public listing pages.
   .filter((p) => !p.data.draft)
-  // Project order is controlled manually in frontmatter for predictable display.
   .sort((a, b) => a.data.order - b.data.order);
-
-const getSlug = (id: string, slug?: string) => slug ?? id.replace(/\.md$/, "");
 ---
 
 <BaseLayout>
-  <h1>Projects</h1>
+  <!-- Minimal list structure keeps the page scan-friendly without introducing cards or visual components. -->
+  <section>
+    <h1>Projects</h1>
 
-  {
-    projects.map((project) => (
-      <article>
-        <h2>
-          <a href={`/projects/${getSlug(project.id, project.data.slug)}`}>
-            {project.data.title}
-          </a>
-        </h2>
-        <p>{project.data.description}</p>
-        <a href={`/projects/${getSlug(project.id, project.data.slug)}`}>Read more →</a>
-      </article>
-    ))
-  }
+    <ul>
+      {
+        projects.map((project) => {
+          const slug =
+            project.data.slug ??
+            project.id.split("/").pop()?.replace(/\.md$/, "");
+          const tech = (project.data as { tech?: string[] }).tech;
+
+          return (
+            <li style="margin-bottom: 2rem;">
+              <h2>
+                <a href={`/projects/${slug}`}>
+                  {project.data.title}
+                </a>
+              </h2>
+
+              <p style="margin-bottom: 0.5rem;">
+                {project.data.description}
+              </p>
+
+              {/* Tech stack gives a quick signal of technical depth while keeping the layout text-only. */}
+              {tech && (
+                <p style="color: var(--color-muted); margin-bottom: 0.5rem;">
+                  Tech: {tech.join(", ")}
+                </p>
+              )}
+
+              <a href={`/projects/${slug}`} style="display: inline-block; margin-top: 0.25rem;">
+                Read more →
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </section>
 </BaseLayout>

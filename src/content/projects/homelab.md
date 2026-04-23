@@ -5,8 +5,6 @@ order: 3
 draft: false
 ---
 
-# Homelab Infrastructure
-
 <!-- Markdown is enough for concise infrastructure notes and keeps the content easy to revise. -->
 <!-- The tone is intentionally plain: hardware, services, and the engineering purpose. -->
 

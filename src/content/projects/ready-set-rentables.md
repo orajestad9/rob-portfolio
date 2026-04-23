@@ -5,8 +5,6 @@ order: 2
 draft: false
 ---
 
-# AI-Powered Market Analysis Platform
-
 <!-- Markdown keeps the case study editable without coupling the content to Astro components. -->
 <!-- The write-up stays direct because the useful detail is the architecture and cost tradeoff. -->
 

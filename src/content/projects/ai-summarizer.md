@@ -5,8 +5,6 @@ order: 4
 draft: false
 ---
 
-# AI Document Summarization Tool
-
 <!-- Markdown separates the project narrative from routing and layout code. -->
 <!-- The description stays technical so it reflects what the tool does without overstating scope. -->
 
