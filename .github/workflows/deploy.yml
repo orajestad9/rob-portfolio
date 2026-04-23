@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+  deploy:
+    # Only deploy on push to main (not PRs)
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: build
+    runs-on: self-hosted
+
+    steps:
+      - name: Sync deploy repo
+        run: |
+          cd ~/apps/rob-portfolio
+          git fetch origin main
+          git checkout main
+          git reset --hard origin/main
+
+      - name: Deploy
+        run: |
+          cd ~/apps/rob-portfolio
+          ./deploy.sh
