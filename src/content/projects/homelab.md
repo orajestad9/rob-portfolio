@@ -2,6 +2,7 @@
 title: "Homelab Infrastructure"
 description: "Personal infrastructure environment for container orchestration, local LLMs, data services, and network tooling."
 order: 3
+draft: false
 ---
 
 # Homelab Infrastructure

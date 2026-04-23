@@ -2,6 +2,7 @@
 title: "AI-Powered Market Analysis Platform"
 description: "Market analysis architecture for AI-generated neighborhood insights across 32+ markets."
 order: 2
+draft: false
 ---
 
 # AI-Powered Market Analysis Platform

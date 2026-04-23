@@ -2,6 +2,7 @@
 title: "End-to-End k6 Performance Testing Pipeline on Kubernetes"
 description: "Automated k6 performance testing integrated into CI/CD and Kubernetes delivery workflows."
 order: 1
+draft: false
 ---
 
 # End-to-End k6 Performance Testing Pipeline on Kubernetes

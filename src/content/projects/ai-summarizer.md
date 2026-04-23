@@ -2,6 +2,7 @@
 title: "AI Document Summarization Tool"
 description: "Document processing tool for extracting, chunking, and summarizing large multi-page PDFs."
 order: 4
+draft: false
 ---
 
 # AI Document Summarization Tool

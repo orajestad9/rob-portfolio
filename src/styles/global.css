@@ -97,6 +97,15 @@ a:hover {
   padding-block: clamp(3rem, 8vw, 5rem);
 }
 
+/* Improve readability for long-form content (case studies, blog posts) */
+.site-main h2 {
+  margin-top: 2rem;
+}
+
+.site-main p {
+  max-width: 70ch;
+}
+
 .site-footer {
   border-top: 1px solid rgba(230, 237, 243, 0.12);
   color: var(--color-muted);
